@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Home,
   FileText,
@@ -18,14 +18,14 @@ import {
 
 // --- Components for Inputs ---
 
-const DescriptionTextArea = ({ placeholder }) => (
-  <textarea
+const DescriptionTextArea = ({ placeholder }: { placeholder?: string }) => (
+  <textarea 
     className="w-full p-3 border border-slate-200 rounded-lg text-sm text-slate-600 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[80px] mb-4 bg-white"
-    placeholder={placeholder || 'Add a description for this artifact...'}
+    placeholder={placeholder || "Add a description for this artifact..."}
   />
 );
 
-const DownloadButton = ({ label, subtext }) => (
+const DownloadButton = ({ label, subtext }: { label: string; subtext?: string }) => (
   <div className="flex flex-col items-start gap-2">
     <button className="flex items-center gap-2 bg-slate-800 text-white px-5 py-3 rounded-lg hover:bg-slate-700 transition-colors w-full sm:w-auto justify-center">
       <Download size={18} />
@@ -98,9 +98,11 @@ const concepts = [
                   src="organigram.jpg"
                   alt="Systems Breakdown Structure Organigram"
                   className="w-full h-auto object-contain max-h-[600px] mx-auto"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
+                  onError={(e) => { 
+                    const target = e.currentTarget as HTMLImageElement;
+                    target.style.display = 'none'; 
+                    const next = target.nextSibling as HTMLElement;
+                    if (next) next.style.display = 'flex'; 
                   }}
                 />
                 <div className="hidden h-64 flex-col items-center justify-center text-slate-400">
@@ -421,7 +423,9 @@ const concepts = [
 
 // --- Components ---
 
-const SidebarItem = ({ icon: Icon, label, subLabel, isActive, onClick }) => (
+const SidebarItem = ({ icon: Icon, label, subLabel, isActive, onClick }: { 
+  icon: any, label: string, subLabel?: string, isActive: boolean, onClick: () => void 
+}) => (
   <button
     onClick={onClick}
     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 group ${
@@ -452,7 +456,7 @@ const SidebarItem = ({ icon: Icon, label, subLabel, isActive, onClick }) => (
   </button>
 );
 
-const SectionCard = ({ title, children, className = '' }) => (
+const SectionCard = ({ title, children, className = '' }: { title: any, children: any, className?: string }) => (
   <div
     className={`bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden ${className}`}
   >
@@ -465,7 +469,7 @@ const SectionCard = ({ title, children, className = '' }) => (
   </div>
 );
 
-const PlaceholderBox = ({ type, text }) => {
+const PlaceholderBox = ({ type, text }: { type: string, text?: string }) => {
   const getIcon = () => {
     switch (type) {
       case 'video':
@@ -497,7 +501,7 @@ const PlaceholderBox = ({ type, text }) => {
   );
 };
 
-const HomePage = ({ navigateToFirst }) => (
+const HomePage = ({ navigateToFirst }: { navigateToFirst: () => void }) => (
   <div className="space-y-8 max-w-5xl mx-auto animate-in fade-in duration-500">
     <div className="text-center py-12 bg-white rounded-2xl shadow-sm border border-slate-100 px-6">
       <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-medium text-sm mb-6">
@@ -523,14 +527,15 @@ const HomePage = ({ navigateToFirst }) => (
       <SectionCard title="Project of Interest (PoI)">
         <div className="space-y-6">
           <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center border border-slate-200 relative overflow-hidden group">
-            {/* Image with fallback */}
             <img
               src="Screenshot 2026-01-07 at 12.47.13.jpg"
               alt="Snowdon Towers"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'flex';
+              onError={(e) => { 
+                const target = e.currentTarget as HTMLImageElement;
+                target.style.display = 'none'; 
+                const next = target.nextSibling as HTMLElement;
+                if (next) next.style.display = 'flex'; 
               }}
             />
             <div className="hidden absolute inset-0 bg-gradient-to-tr from-slate-200 to-slate-100 items-center justify-center w-full h-full">
@@ -588,9 +593,8 @@ const HomePage = ({ navigateToFirst }) => (
   </div>
 );
 
-const ConceptPage = ({ concept }) => (
+const ConceptPage = ({ concept }: { concept: any }) => (
   <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-    {/* Header */}
     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 relative overflow-hidden">
       <div className="absolute top-0 right-0 p-8 opacity-5">
         <concept.icon size={120} />
@@ -611,8 +615,7 @@ const ConceptPage = ({ concept }) => (
       </div>
     </div>
 
-    {/* Content Parts */}
-    {concept.deliverables.map((item, index) => (
+    {concept.deliverables.map((item: any, index: number) => (
       <SectionCard
         key={index}
         title={
@@ -655,7 +658,6 @@ const ConceptPage = ({ concept }) => (
       </SectionCard>
     ))}
 
-    {/* Footer Navigation for Concept */}
     <div className="flex justify-between pt-8 border-t border-slate-200">
       <div className="text-xs text-slate-400">CME4121 ODL Response</div>
     </div>
@@ -663,7 +665,7 @@ const ConceptPage = ({ concept }) => (
 );
 
 const App = () => {
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState<string | number>('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -686,7 +688,6 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex">
-      {/* Mobile Sidebar Overlay */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-slate-900/50 z-20 lg:hidden backdrop-blur-sm transition-opacity"
@@ -694,7 +695,6 @@ const App = () => {
         />
       )}
 
-      {/* Sidebar Navigation */}
       <aside
         className={`fixed lg:sticky top-0 left-0 h-screen w-80 bg-white border-r border-slate-200 z-30 transform transition-transform duration-300 ease-out lg:translate-x-0 overflow-y-auto ${
           isSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
@@ -754,9 +754,7 @@ const App = () => {
         </nav>
       </aside>
 
-      {/* Main Content Area */}
       <main className="flex-1 min-w-0 flex flex-col">
-        {/* Mobile Header */}
         <div className="lg:hidden bg-white/80 backdrop-blur-md border-b border-slate-200 p-4 flex items-center justify-between sticky top-0 z-20">
           <div className="font-bold text-slate-800 flex items-center gap-2">
             <Building size={18} className="text-blue-600" />
@@ -779,4 +777,3 @@ const App = () => {
 };
 
 export default App;
-
