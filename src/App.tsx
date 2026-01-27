@@ -14,18 +14,27 @@ import {
   Users,
   Building,
   Download,
+  Database,
+  Layers,
+  Cpu,
 } from 'lucide-react';
 
 // --- Components for Inputs ---
 
 const DescriptionTextArea = ({ placeholder }: { placeholder?: string }) => (
-  <textarea 
+  <textarea
     className="w-full p-3 border border-slate-200 rounded-lg text-sm text-slate-600 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[80px] mb-4 bg-white"
-    placeholder={placeholder || "Add a description for this artifact..."}
+    placeholder={placeholder || 'Add a description for this artifact...'}
   />
 );
 
-const DownloadButton = ({ label, subtext }: { label: string; subtext?: string }) => (
+const DownloadButton = ({
+  label,
+  subtext,
+}: {
+  label: string;
+  subtext?: string;
+}) => (
   <div className="flex flex-col items-start gap-2">
     <button className="flex items-center gap-2 bg-slate-800 text-white px-5 py-3 rounded-lg hover:bg-slate-700 transition-colors w-full sm:w-auto justify-center">
       <Download size={18} />
@@ -54,6 +63,133 @@ const concepts = [
         part: 'Background',
         prompt:
           'What are the main processes, stakeholders and information flows of your project of interest (PoI)?',
+        content: (
+          <div className="space-y-6">
+            <p className="text-slate-600 mb-4">
+              The Snowdon Towers project involves a complex network of
+              stakeholders interacting across the asset lifecycle. Below is the
+              breakdown of key groups and their information flows.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Client Group */}
+              <div className="bg-blue-50 p-5 rounded-xl border border-blue-100 shadow-sm">
+                <h4 className="font-bold text-blue-800 flex items-center gap-2 mb-3">
+                  <Users size={18} /> Client, Users & Operations
+                </h4>
+                <ul className="space-y-3 text-sm text-blue-900/80">
+                  <li className="leading-relaxed">
+                    <strong className="text-blue-900">Owner / Client:</strong>{' '}
+                    Sets project goals, budget, sustainability targets, and
+                    defines information requirements for Tandem and handover.
+                  </li>
+                  <li className="leading-relaxed">
+                    <strong className="text-blue-900">FM / Operations:</strong>{' '}
+                    Future operators relying on the digital twin for maintenance
+                    and asset tracking.
+                  </li>
+                  <li className="leading-relaxed">
+                    <strong className="text-blue-900">End Users:</strong> Their
+                    comfort and space needs drive requirements feeding into
+                    Revit design and Insight analysis.
+                  </li>
+                </ul>
+              </div>
+
+              {/* Design Group */}
+              <div className="bg-indigo-50 p-5 rounded-xl border border-indigo-100 shadow-sm">
+                <h4 className="font-bold text-indigo-800 flex items-center gap-2 mb-3">
+                  <Layers size={18} /> Design & Engineering
+                </h4>
+                <ul className="space-y-3 text-sm text-indigo-900/80">
+                  <li className="leading-relaxed">
+                    <strong className="text-indigo-900">Architect:</strong>{' '}
+                    Leads building layout in Revit, coordinates the BIM model,
+                    and uses Insight for performance iterations.
+                  </li>
+                  <li className="leading-relaxed">
+                    <strong className="text-indigo-900">
+                      Structural & MEP:
+                    </strong>{' '}
+                    Develop discipline models, ensure clash-free design via
+                    Navisworks, and supply data for Tandem.
+                  </li>
+                  <li className="leading-relaxed">
+                    <strong className="text-indigo-900">
+                      Sustainability Engineer:
+                    </strong>{' '}
+                    Interprets Insight outputs (energy, carbon) to advise on
+                    performance targets.
+                  </li>
+                </ul>
+              </div>
+
+              {/* Construction Group */}
+              <div className="bg-amber-50 p-5 rounded-xl border border-amber-100 shadow-sm">
+                <h4 className="font-bold text-amber-800 flex items-center gap-2 mb-3">
+                  <HardHat size={18} /> Construction & Delivery
+                </h4>
+                <ul className="space-y-3 text-sm text-amber-900/80">
+                  <li className="leading-relaxed">
+                    <strong className="text-amber-900">Main Contractor:</strong>{' '}
+                    Uses 4D BIM (Revit + MS Project + Navisworks) for phasing
+                    and site coordination.
+                  </li>
+                  <li className="leading-relaxed">
+                    <strong className="text-amber-900">Subcontractors:</strong>{' '}
+                    Use coordinated models for quantity take-off,
+                    prefabrication, and as-built data feedback.
+                  </li>
+                </ul>
+              </div>
+
+              {/* IM Group */}
+              <div className="bg-emerald-50 p-5 rounded-xl border border-emerald-100 shadow-sm">
+                <h4 className="font-bold text-emerald-800 flex items-center gap-2 mb-3">
+                  <Database size={18} /> Information Management
+                </h4>
+                <ul className="space-y-3 text-sm text-emerald-900/80">
+                  <li className="leading-relaxed">
+                    <strong className="text-emerald-900">BIM Manager:</strong>{' '}
+                    Manages standards, coordinates exchanges (IFC/NWC), and
+                    defines data flows.
+                  </li>
+                  <li className="leading-relaxed">
+                    <strong className="text-emerald-900">
+                      Project Manager:
+                    </strong>{' '}
+                    Oversees scope and time, ensuring BIM outputs support
+                    contractual deliverables.
+                  </li>
+                </ul>
+              </div>
+
+              {/* Digital Twin Group */}
+              <div className="md:col-span-2 bg-slate-100 p-5 rounded-xl border border-slate-200 shadow-sm">
+                <h4 className="font-bold text-slate-800 flex items-center gap-2 mb-3">
+                  <Cpu size={18} /> Digital Twin & Data Governance
+                </h4>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="text-sm text-slate-600 leading-relaxed">
+                    <strong className="text-slate-800 block mb-1">
+                      Asset Information Manager
+                    </strong>
+                    Responsible for structuring, validating, and maintaining the
+                    asset information model in Tandem for accuracy during
+                    operations.
+                  </div>
+                  <div className="text-sm text-slate-600 leading-relaxed">
+                    <strong className="text-slate-800 block mb-1">
+                      IT / Data Governance
+                    </strong>
+                    Supports integration between BIM tools and organizational
+                    systems, ensuring data security and long-term availability.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
       },
       {
         part: 'Artifact',
@@ -79,6 +215,172 @@ const concepts = [
         part: 'Background',
         prompt:
           'Who are the stakeholders during the BIM model development phase? What datasets are needed?',
+        content: (
+          <div className="space-y-8">
+            {/* Stakeholders Section */}
+            <div>
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <Users className="text-blue-600" size={20} />
+                Stakeholders in BIM Model Development
+              </h3>
+              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                <table className="w-full text-sm text-left">
+                  <thead className="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+                    <tr>
+                      <th className="p-4 w-1/3">Stakeholder Group</th>
+                      <th className="p-4">Typical Role in Model Development</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Client / Owner / Asset Manager
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Defines information needs over the life cycle and
+                        high-level requirements (e.g. for operation,
+                        maintenance).
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Architect & Engineers
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Author the discipline models in Revit (architecture,
+                        structure, MEP) and coordinate them into a federated
+                        BIM.
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Contractor / Subcontractors
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Use and enrich models for constructability,
+                        prefabrication, 4D/5D simulations, and clash detection.
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        BIM Manager / Coordinator
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Sets up modelling rules, LOD, parameters, naming and
+                        coordinates interoperability (IFC, Navisworks, Tandem).
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        FM / Operations Reps
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Indicate which asset data and documents (manuals,
+                        parameters) must be embedded or linked for digital twin
+                        use.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Datasets Section */}
+            <div>
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <Database className="text-blue-600" size={20} />
+                Required Datasets
+              </h3>
+              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                <table className="w-full text-sm text-left">
+                  <thead className="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+                    <tr>
+                      <th className="p-4 w-1/3">Dataset Type</th>
+                      <th className="p-4">
+                        Concrete Datasets for BIM Modelling
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Spatial & Geometric
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Site/location, levels, grids, massing (LOD100) and
+                        detailed 3D geometry for architectural/structural/MEP
+                        systems.
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Object Libraries
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Revit family libraries (doors, windows, beams, ducts)
+                        and custom families needed for the PoI.
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Semantic / Properties
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Element parameters (materials, dimensions, fire rating,
+                        thermal properties) and non-geometric attributes.
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Systems Breakdown (SBS)
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        SBS for the PoI, including IDs for systems, subsystems
+                        and components used as parameters.
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Coding & Linking
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Shared parameters (e.g. SBS-code) and matching MS
+                        Project codes (Element, Task Type) for 4D.
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Reference & Requirements
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Project requirements, spatial program, design criteria,
+                        and existing drawings/models.
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Exchange / Interoperability
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        IFC/NWC exports and CSV schedule exports from MS Project
+                        for clash detection and simulation.
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-slate-50/50">
+                      <td className="p-4 font-medium text-slate-900">
+                        Lifecycle / Operations
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        Asset structure/maintenance parameters (Tandem), linked
+                        O&M documents and embedded data.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        ),
       },
       {
         part: 'Artifact',
@@ -98,11 +400,11 @@ const concepts = [
                   src="organigram.jpg"
                   alt="Systems Breakdown Structure Organigram"
                   className="w-full h-auto object-contain max-h-[600px] mx-auto"
-                  onError={(e) => { 
+                  onError={(e) => {
                     const target = e.currentTarget as HTMLImageElement;
-                    target.style.display = 'none'; 
+                    target.style.display = 'none';
                     const next = target.nextSibling as HTMLElement;
-                    if (next) next.style.display = 'flex'; 
+                    if (next) next.style.display = 'flex';
                   }}
                 />
                 <div className="hidden h-64 flex-col items-center justify-center text-slate-400">
@@ -423,8 +725,18 @@ const concepts = [
 
 // --- Components ---
 
-const SidebarItem = ({ icon: Icon, label, subLabel, isActive, onClick }: { 
-  icon: any, label: string, subLabel?: string, isActive: boolean, onClick: () => void 
+const SidebarItem = ({
+  icon: Icon,
+  label,
+  subLabel,
+  isActive,
+  onClick,
+}: {
+  icon: any;
+  label: string;
+  subLabel?: string;
+  isActive: boolean;
+  onClick: () => void;
 }) => (
   <button
     onClick={onClick}
@@ -456,7 +768,15 @@ const SidebarItem = ({ icon: Icon, label, subLabel, isActive, onClick }: {
   </button>
 );
 
-const SectionCard = ({ title, children, className = '' }: { title: any, children: any, className?: string }) => (
+const SectionCard = ({
+  title,
+  children,
+  className = '',
+}: {
+  title: any;
+  children: any;
+  className?: string;
+}) => (
   <div
     className={`bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden ${className}`}
   >
@@ -469,7 +789,7 @@ const SectionCard = ({ title, children, className = '' }: { title: any, children
   </div>
 );
 
-const PlaceholderBox = ({ type, text }: { type: string, text?: string }) => {
+const PlaceholderBox = ({ type, text }: { type: string; text?: string }) => {
   const getIcon = () => {
     switch (type) {
       case 'video':
@@ -531,11 +851,11 @@ const HomePage = ({ navigateToFirst }: { navigateToFirst: () => void }) => (
               src="Screenshot 2026-01-07 at 12.47.13.jpg"
               alt="Snowdon Towers"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              onError={(e) => { 
+              onError={(e) => {
                 const target = e.currentTarget as HTMLImageElement;
-                target.style.display = 'none'; 
+                target.style.display = 'none';
                 const next = target.nextSibling as HTMLElement;
-                if (next) next.style.display = 'flex'; 
+                if (next) next.style.display = 'flex';
               }}
             />
             <div className="hidden absolute inset-0 bg-gradient-to-tr from-slate-200 to-slate-100 items-center justify-center w-full h-full">
