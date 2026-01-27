@@ -31,15 +31,29 @@ const DescriptionTextArea = ({ placeholder }: { placeholder?: string }) => (
 const DownloadButton = ({
   label,
   subtext,
+  href,
 }: {
   label: string;
   subtext?: string;
+  href?: string;
 }) => (
-  <div className="flex flex-col items-start gap-2">
-    <button className="flex items-center gap-2 bg-slate-800 text-white px-5 py-3 rounded-lg hover:bg-slate-700 transition-colors w-full sm:w-auto justify-center">
-      <Download size={18} />
-      <span className="font-medium">{label}</span>
-    </button>
+  <div className="flex flex-col items-start gap-2 w-full sm:w-auto">
+    {href ? (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-2 bg-slate-800 text-white px-5 py-3 rounded-lg hover:bg-slate-700 transition-colors w-full sm:w-auto justify-center"
+      >
+        <Download size={18} />
+        <span className="font-medium">{label}</span>
+      </a>
+    ) : (
+      <button className="flex items-center gap-2 bg-slate-800 text-white px-5 py-3 rounded-lg hover:bg-slate-700 transition-colors w-full sm:w-auto justify-center">
+        <Download size={18} />
+        <span className="font-medium">{label}</span>
+      </button>
+    )}
     {subtext && (
       <p className="text-xs text-slate-500 italic flex items-center gap-1">
         <Info size={12} />
@@ -196,6 +210,36 @@ const concepts = [
         prompt:
           'Develop a BIM Execution Plan (BEP) for your Project of Interest.',
         type: 'document',
+        content: (
+          <div className="space-y-6">
+            <div className="bg-slate-50 p-6 rounded-xl border border-slate-200">
+              <h4 className="font-bold text-slate-800 mb-3 text-lg">
+                BIM Execution Plan (BEP)
+              </h4>
+              <DescriptionTextArea placeholder="Describe the key goals and standards defined in this BEP..." />
+              <div className="bg-white p-6 rounded-lg border border-slate-200 flex flex-col items-center sm:items-start">
+                <div className="flex items-center gap-4 mb-4 text-slate-700 w-full">
+                  <div className="bg-red-50 p-3 rounded-lg border border-red-100">
+                    <FileText className="text-red-600" size={24} />
+                  </div>
+                  <div className="flex-1">
+                    <span className="font-semibold block text-slate-900">
+                      BEP_Group11.pdf
+                    </span>
+                    <span className="text-xs text-slate-500">
+                      Project Execution Plan Document
+                    </span>
+                  </div>
+                </div>
+                <DownloadButton
+                  label="View / Download BEP"
+                  href="BEP_Group11.pdf"
+                  subtext="Opens the PDF file in a new tab"
+                />
+              </div>
+            </div>
+          </div>
+        ),
       },
       {
         part: 'Reflection',
@@ -848,7 +892,7 @@ const HomePage = ({ navigateToFirst }: { navigateToFirst: () => void }) => (
         <div className="space-y-6">
           <div className="aspect-video bg-slate-100 rounded-lg flex items-center justify-center border border-slate-200 relative overflow-hidden group">
             <img
-              src="Screenshot 2026-01-07 at 12.47.13.jpg"
+              src="Snowdon Towers Render.jpg"
               alt="Snowdon Towers"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               onError={(e) => {
