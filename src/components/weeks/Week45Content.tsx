@@ -1,5 +1,6 @@
 import { Users, Database, Wrench, BarChart, Settings, AlertTriangle, LayoutDashboard, FileText, Box, Activity } from 'lucide-react';
 
+
 export const Week45Background = () => (
   <div className="space-y-8">
     <div className="space-y-6">
@@ -147,6 +148,27 @@ export const Week45Reflection = () => (
         <p>
           Third, where available, operational data such as sensor streams (for example temperature and humidity) or externally logged condition information can be connected from separate data sources into Tandem classifications, allowing these readings to be associated with specific assets and visualized alongside the model for better maintenance decision‑making.
         </p>
+        
+        {/* --- ADDED PARAGRAPH --- */}
+        <p>
+          Uploading the models to Autodesk Tandem caused a time consuming problem. We tried several times to transfer our models to Autodesk Tandem exactly as described in the instruction document, but we kept encountering the same error each time. We tested different files, adjusted various settings, and tried multiple laptops, but nothing worked at first. Eventually, the upload succeeded on a third laptop.
+        </p>
+
+        {/* --- ADDED IMAGES --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+            <div className="border border-slate-200 rounded-lg overflow-hidden">
+                <img src="Concept45Ref1.jpeg" alt="Revit Upload Attempt" className="w-full h-auto object-cover" />
+                <p className="bg-slate-50 text-xs text-slate-500 p-2 text-center border-t border-slate-200">
+                    Attempting upload via the Analyze tab in Revit
+                </p>
+            </div>
+            <div className="border border-slate-200 rounded-lg overflow-hidden">
+                <img src="Concept45Ref2.jpeg" alt="Insight Error Screen" className="w-full h-auto object-cover" />
+                <p className="bg-slate-50 text-xs text-slate-500 p-2 text-center border-t border-slate-200">
+                    Recurring "Application Unavailable" error during transfer
+                </p>
+            </div>
+        </div>
       </div>
     </div>
 
@@ -180,7 +202,7 @@ export const Week45Reflection = () => (
           Next, we would integrate Tandem with external systems such as a maintenance management system or ERP, so that work orders, costs, and spare‑parts data can be linked directly to assets and visualized on the same dashboard. We would also connect additional IoT streams (for example temperature, humidity, or equipment‑status sensors) and use Tandem’s streams and classification features to overlay live performance data on the 3D model, enabling condition‑based maintenance and early detection of anomalies.
         </p>
         <p>
-          Finally, we would configure role‑specific dashboard views—for facility managers, financial controllers, and sustainability officers—so that each stakeholder sees tailored KPIs and can make better decisions using the same underlying digital twin, rather than working in separate, disconnected tools.
+          Finally, we would configure role‑specific dashboard views (for facility managers, financial controllers, and sustainability officers) so that each stakeholder sees tailored KPIs and can make better decisions using the same underlying digital twin, rather than working in separate, disconnected tools.
         </p>
       </div>
     </div>
